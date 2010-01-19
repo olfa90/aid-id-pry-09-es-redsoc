@@ -1,0 +1,171 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <properties>
+    <jersey-version>1.0.3</jersey-version>
+  </properties>
+  
+  <parent>
+    <artifactId>APP</artifactId>
+    <groupId>com.andago</groupId>
+    <version>1.0</version>
+    <relativePath>../APP/pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.andago</groupId>
+  <artifactId>person-preferences-service</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <name>Person preferences service</name>
+  <url>http://maven.apache.org</url>
+
+  
+  <dependencies>
+    
+	<dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+
+	<dependency>
+      <groupId>com.andago</groupId>
+      <artifactId>question-engine</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    
+	<dependency>
+      <groupId>com.andago</groupId>
+      <artifactId>semanthic-core</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+	
+
+	<!-- Rest services libraries with Jersey-->
+	  <dependency>
+		  <groupId>com.sun.jersey</groupId>
+		  <artifactId>jersey-server</artifactId>
+		  <version>${jersey-version}</version>
+  	</dependency>
+
+    <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-json</artifactId>
+        <version>${jersey-version}</version>
+    </dependency>
+    
+    <dependency>
+    	<groupId>net.sf.json-lib</groupId>
+    	<artifactId>json-lib</artifactId>
+    	<version>2.3</version>
+    	<classifier>jdk15</classifier>
+	</dependency>
+    
+    <dependency>
+		  <groupId>com.sun.jersey.contribs</groupId>
+		  <artifactId>jersey-multipart</artifactId>
+		  <version>${jersey-version}</version>
+	 </dependency>
+
+	  <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey-version}</version>
+      <scope>compile</scope>
+    </dependency>
+	
+	<dependency>
+       <groupId>com.sun.jersey.contribs</groupId>
+       <artifactId>jersey-spring</artifactId>
+       <version>${jersey-version}</version>
+   </dependency>
+	
+	<dependency>
+            <groupId>com.sun.jersey.test.framework</groupId>
+            <artifactId>jersey-test-framework</artifactId>
+            <version>${jersey-version}</version>
+            <scope>test</scope>
+ 	</dependency>
+	 
+	 <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+      <scope>compile</scope>
+    </dependency>
+	
+	<dependency>
+    	<groupId>opensymphony</groupId>
+            <artifactId>quartz-all</artifactId>
+            <version>1.6.0</version>
+            <scope>compile</scope>
+   	</dependency>
+	
+	
+	<dependency>
+    	<groupId>javax.transaction</groupId>
+		<artifactId>jta</artifactId>
+		<version>1.1</version>
+        <scope>compile</scope>
+   	</dependency>
+
+
+	<dependency>
+		<groupId>org.jdom</groupId>
+		<artifactId>jdom</artifactId>
+		<version>1.1</version>
+	</dependency>
+	
+	<dependency>
+            <groupId>com.sun.grizzly</groupId>
+            <artifactId>grizzly-servlet-webserver</artifactId>
+            <version>1.9.8</version>
+        </dependency>
+	
+  </dependencies>
+
+
+  <build>
+
+
+    <plugins>
+    	
+			<plugin>
+        		<groupId>org.glassfish</groupId>
+        		<artifactId>maven-glassfish-plugin</artifactId>
+        		<version>1.0-alpha-4</version>
+      		</plugin>
+      		
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archiveClasses>true</archiveClasses>
+                    <webXml>
+                        ${basedir}/src/main/webapp/WEB-INF/web.xml
+                    </webXml>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>web</id>
+                        <goals>
+                            <goal>inplace</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+	 
+	 <finalName>userpreferences</finalName>
+	 
+  </build>
+
+
+</project>

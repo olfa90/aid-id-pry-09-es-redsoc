@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
+
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.use_sql_comments">true</prop>
+        <prop key="hibernate.format_sql">true</prop>
+        <prop key="hibernate.show_sql">false</prop>
+        
+        <!--Derby database -->
+        <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+        <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop>
+        <prop key="hibernate.connection.url">jdbc:derby:${java.io.tmpdir}userpreferences${file.separator}amadeusdb;create=true</prop>
+        <prop key="hibernate.connection.username">amadeus</prop>
+        <prop key="hibernate.connection.password">demonio</prop>
+        
+        <!-- MySQL Database 
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+		<prop key="hibernate.connection.url">jdbc:mysql://localhost/hibernate</prop>
+		<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+		<prop key="hibernate.connection.username">root</prop>
+        <prop key="hibernate.connection.password">demonio</prop>
+		-->
+		
+		<prop key="hibernate.hbm2ddl.auto">update</prop> 
+        <prop key="hibernate.dbcp.maxActive">50</prop>
+        <prop key="hibernate.dbcp.maxIdle">25</prop>
+        <prop key="hibernate.dbcp.maxWait">-1</prop>
+        <prop key="hibernate.dbcp.whenExhaustedAction">1</prop>
+        <prop key="hibernate.dbcp.testOnBorrow">true</prop>
+        <prop key="hibernate.dbcp.logAbandoned">false</prop>
+        <prop key="hibernate.connection.autocommit">true</prop>
+      </props>
+    </property>
+    <property name="annotatedClasses">
+      <list>
+        <value>com.andago.question.entity.Question</value>
+        <value>com.andago.question.entity.Person</value>
+        <value>com.andago.question.entity.Proposal</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor" autowire="byName" /><!--sessionFactory will get autowired-->
+
+  <bean id="questionDaoTarget" class="com.andago.question.dao.QuestionDAOHibernateImpl" autowire="byName" /><!--sessionFactory will get autowired-->
+
+  <bean id="questionDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="proxyInterfaces">
+      <value>com.andago.question.dao.QuestionDAO</value>
+    </property>
+    <property name="interceptorNames">
+      <list>
+        <value>hibernateInterceptor</value>
+        <value>questionDaoTarget</value>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="answerStore" class="com.andago.question.storage.impl.FileSystemAnswerStore">
+    	<constructor-arg index="0" value="${java.io.tmpdir}userpreferences"/>
+  </bean>
+  
+  
+  <bean id="questionManager" class="com.andago.question.core.QuestionManager">
+  	 	<!-- constructor injection using the neater 'ref' attribute 
+  		<constructor-arg index="0" value="D:\\workspace\\semanthic-app\\data_store"/>
+  		-->
+  		<constructor-arg index="0" value="${java.io.tmpdir}userpreferences"/>
+  		<constructor-arg index="1" ref="questionDAO"/>
+  		<constructor-arg index="2" ref="answerStore"/>
+  </bean>
+
+</beans>
