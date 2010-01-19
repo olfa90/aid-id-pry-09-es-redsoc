@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qdescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <question>
+        <identifier>1</identifier>
+        <topic>destinations</topic>
+        <text>¿Te gusta viajar a Londres?</text>
+        <type>single</type>
+    </question>
+    <proposal>
+        <answer>
+            <code>1</code>
+            <text>si</text>
+        </answer>
+        <answer>
+            <code>2</code>
+            <text>no</text>
+        </answer>
+    </proposal>
+    <selected>
+        <answer>
+            <code>1</code>
+            <text>Texto de prueba</text>
+        </answer>
+        <answer>
+            <code>2</code>
+            <text>Texto de prueba</text>
+        </answer>
+        <comment>Pero solo en verano</comment>
+    </selected>
+</qdescriptor>

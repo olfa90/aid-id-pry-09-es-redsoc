@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <properties>
+    <spring-version>2.5.6</spring-version>
+    <hibernate-version>3.2.1.ga</hibernate-version>
+  </properties>
+  
+  <parent>
+    <artifactId>APP</artifactId>
+    <groupId>com.andago</groupId>
+    <version>1.0</version>
+    <relativePath>../APP/pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.andago</groupId>
+  <artifactId>question-engine</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>Question core library</name>
+  <url>http://maven.apache.org</url>
+
+
+  <dependencies>
+
+	<dependency>
+		<groupId>org.jdom</groupId>
+		<artifactId>jdom</artifactId>
+		<version>1.1</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    
+  	
+	<dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>${hibernate-version}</version>
+    </dependency>
+	
+     	<dependency>
+      		<groupId>org.hibernate</groupId>
+      		<artifactId>hibernate-annotations</artifactId>
+      		<version>${hibernate-version}</version>
+      		<scope>compile</scope>
+    	</dependency>
+
+		<dependency>
+      		<groupId>org.apache.derby</groupId>
+		    <artifactId>derby</artifactId>
+			<version>10.4.2.0</version>
+    	</dependency>
+    	
+    	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>5.1.10</version>
+	</dependency>
+	
+    <dependency>
+    	<groupId>cglib</groupId>
+    	<artifactId>cglib</artifactId>
+    	<version>2.2</version>
+	</dependency>
+	
+  </dependencies>
+
+<build>
+	 
+	 <finalName>question-engine</finalName>
+	 
+  </build>
+
+
+</project>

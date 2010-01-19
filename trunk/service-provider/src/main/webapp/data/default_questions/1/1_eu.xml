@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qdescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+    <question>
+        <identifier>1</identifier>
+        <topic>destinations</topic>
+        <text>Gustatzen zaizu londora joatea??</text>
+        <type>single</type>
+    </question>
+    <proposal>
+        <answer>
+            <code>1</code>
+            <text>si</text>
+        </answer>
+        <answer>
+            <code>2</code>
+            <text>no</text>
+        </answer>
+    </proposal>
+</qdescriptor>

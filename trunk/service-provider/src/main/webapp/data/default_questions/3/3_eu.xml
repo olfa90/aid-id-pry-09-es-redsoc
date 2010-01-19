@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qdescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+    <question>
+        <identifier>3</identifier>
+        <topic>destinations</topic>
+        <text>Gustatzen zaizu Miami joatera?</text>
+        <type>simple</type>
+    </question>
+    <proposal>
+        <answer>
+            <code>1</code>
+            <text>bai</text>
+        </answer>
+        <answer>
+            <code>2</code>
+            <text>ez</text>
+        </answer>
+    </proposal>
+</qdescriptor>

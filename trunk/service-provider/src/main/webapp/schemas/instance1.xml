@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qdescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/D:/workspace/semanthic-app/service-provider/src/main/webapp/schemas/question_schema.xsd">
+    <question>
+        <identifier>50</identifier>
+        <topic>topic0</topic>
+        <text>text0</text>
+        <type>single</type>
+    </question>
+    <proposal>
+        <answer>
+            <code>50</code>
+            <text>text1</text>
+        </answer>
+        <answer>
+            <code>50</code>
+            <text>text2</text>
+        </answer>
+    </proposal>
+</qdescriptor>
