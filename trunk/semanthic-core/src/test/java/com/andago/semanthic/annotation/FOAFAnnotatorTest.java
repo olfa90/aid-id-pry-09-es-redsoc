@@ -12,6 +12,7 @@ import com.andago.semanthic.annotation.person.impl.FOAFAnnotator;
 import java.util.List;
 import java.util.ArrayList;
 
+@Ignore
 public class FOAFAnnotatorTest {
 	
 	private static Logger log = Logger.getLogger(FOAFAnnotatorTest.class);
