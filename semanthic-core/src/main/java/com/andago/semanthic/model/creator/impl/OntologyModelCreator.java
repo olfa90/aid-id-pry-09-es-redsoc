@@ -33,6 +33,7 @@ public class OntologyModelCreator implements IModelCreator {
 		OntModel m = ModelFactory.createOntologyModel(
 				this.getModelSpec(maker), base );
 		m.read(ONT1);
+		
 		/*Resource personClass = m.getResource( FOAF_NS + "Person" );
 		for (Iterator<Individual> i = m.listIndividuals(personClass); i.hasNext(); ) {
 			Individual individual = i.next();
