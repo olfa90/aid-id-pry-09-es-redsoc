@@ -20,7 +20,7 @@
   <name>Person preferences service</name>
   <url>http://maven.apache.org</url>
 
-  
+  	
   <dependencies>
     
 	<dependency>
