@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.util.ApplicationDescriptor;
 
-
+@Ignore
 public class PersonResourceTest extends JerseyTest {
 	
 	/*The logger.*/

@@ -78,12 +78,20 @@
   		<constructor-arg index="2" ref="answerStore"/>
   </bean>
   
+    <bean id="aModelCreator" class="com.andago.semanthic.model.creator.impl.DefaultModelCreator">
+  		<!--  constructor-arg index="0" value="http://xmlns.com/foaf/spec/20100101.rdf"/-->
+  </bean>
+  
+  <bean id="tModelCreator" class="com.andago.semanthic.model.creator.impl.OntologyModelCreator">
+  		<constructor-arg index="0" value="http://xmlns.com/foaf/spec/20100101.rdf"/>
+  </bean>
+    
     <bean id="drivven" class="com.andago.semanthic.model.drivven.impl.DBDrivven">
-    	<constructor-arg index="0" value="jdbc:derby:D:\\workspace\\semanthic-app\\data_store\\semanthicdb;create=true"/>
+    	<constructor-arg index="0" value="jdbc:derby:${java.io.tmpdir}${file.separator}userpreferences${file.separator}semanthicdb;create=true"/>
     	<constructor-arg index="1" value="root"/>
     	<constructor-arg index="2" value="demonio"/>
     	<constructor-arg index="3" value="Derby"/>
-    	<constructor-arg index="4" value="false"/>
+    	<constructor-arg index="4" value="true"/>
     	<constructor-arg index="5">
     		<map>
         		<entry>
@@ -93,7 +101,9 @@
             		<value>http://xmlns.com/foaf/0.1/</value>
         		</entry>
     		</map>
-    	</constructor-arg>	
+    	</constructor-arg>
+    	<constructor-arg index="6" ref="aModelCreator"/>
+    	<constructor-arg index="7" ref="tModelCreator"/>
   </bean>
   
   
