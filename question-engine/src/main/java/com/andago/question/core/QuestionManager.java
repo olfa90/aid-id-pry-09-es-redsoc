@@ -23,8 +23,8 @@ import com.andago.question.exception.storage.StorageCreationException;
 import com.andago.question.storage.ifc.IAnswerStore;
 import com.andago.question.exception.core.QuestionNotAvailableException;
 import java.util.List;
-import java.util.ArrayList;
 import com.andago.question.exception.core.BadAnswerException;
+import com.andago.question.config.IConfigable;
 /**
  * 
  * This class give the  methods to manage person's preferences questions 
@@ -33,12 +33,12 @@ import com.andago.question.exception.core.BadAnswerException;
  * @author eduardo.perrino@andago.com
  *
  */
-public class QuestionManager {
+public class QuestionManager implements IConfigable {
 	
 	/*The bean work folder.*/
 	private String workFolder = "";
 	/*Folder name to store questions.*/
-	private final static String question_folder_name = "questions";
+	public final static String QUESTIONS_FOLDER_NAME = "questions";
 	/*Folder to store questions.*/
 	private File question_storage;
 	/*The logger.*/
@@ -67,7 +67,7 @@ public class QuestionManager {
 		this.questionDAO = questionDAO;
 		this.answerStore = answerStore;
 		this.question_storage = new File(this.workFolder + 
-				File.separator + this.question_folder_name);
+				File.separator + this.QUESTIONS_FOLDER_NAME);
 		if(this.question_storage.exists()) {
 			this.loadQuestions();
 		}
@@ -181,6 +181,8 @@ public class QuestionManager {
 			}
 		}
 	}
+	
+	
 	
 	private void checkAnswerValidity(org.jdom.Document question, 
 			List<String> answers) throws BadAnswerException, Exception {
@@ -361,4 +363,18 @@ public class QuestionManager {
 		return false;
 	}
 
+	@Override
+	public Map<String, String> getConfig() {
+		Map<String, String> configData = new HashMap<String, String>();
+		configData.put("Question store folder", 
+				this.question_storage.getAbsolutePath());
+		configData.putAll(this.answerStore.getConfig());
+		return configData;
+	}
+	
+	public void addQuestionXML(String questionId,
+			Map<String, org.jdom.Document>  questionMap) {
+		this.question_storage.getAbsolutePath();
+			
+	}
 }

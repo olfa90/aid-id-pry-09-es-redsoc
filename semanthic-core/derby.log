@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2010-02-02 15:40:32.206 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0126-8f57-0b38-00000143e0b0
+2010-02-12 13:01:44.124 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0126-c245-4062-000000426d38
 on database directory D:\workspace\semanthic-app\data_store\semanthicdb  
 
 Database Class Loader started - derby.database.classpath=''

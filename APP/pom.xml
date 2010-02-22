@@ -47,6 +47,8 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		
+		<!--  
 		<repository>
 			<id>semweb4j-repo</id>
 			<name>Semweb4j.org maven repo</name>
@@ -60,7 +62,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+		-->
 
 		<repository>
 			<id>ibiblio</id>
@@ -71,9 +73,10 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+		
+		<!--  
 		<repository>
-			<id>MvnSearch</id>
+			<id>UnibasMavenRepo</id>
 			<name>Maven Repository Switchboard</name>
 			<layout>default</layout>
 			<url>http://on.cs.unibas.ch/maven/repository</url>
@@ -81,19 +84,19 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+		
+		
+		
 		<repository>
-			<id>sryll--libs</id>
+			<id>MvnSearch</id>
 			<name>Maven Repository Switchboard</name>
 			<layout>default</layout>
-			<url>http://myhpi.de/~sryll/maven-repo</url>
+			<url>http://www.mvnsearch.org/maven2/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-
-
+	-->
 	</repositories>
 
 	<pluginRepositories>

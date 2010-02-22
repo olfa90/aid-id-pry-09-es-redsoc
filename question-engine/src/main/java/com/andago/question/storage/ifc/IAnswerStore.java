@@ -3,6 +3,7 @@ package com.andago.question.storage.ifc;
 import java.io.IOException;
 import com.andago.question.exception.storage.StorageAccessException;
 import com.andago.question.exception.storage.StorageCreationException;
+import com.andago.question.config.IConfigable;
 
 /**
  * Interface to provide methods to store the person's answers for 
@@ -11,7 +12,7 @@ import com.andago.question.exception.storage.StorageCreationException;
  * @author eduardo.perrino@andago.com
  *
  */
-public interface IAnswerStore {
+public interface IAnswerStore extends IConfigable {
 	
 	/**
 	 * Method to store a person's answer for a given question.

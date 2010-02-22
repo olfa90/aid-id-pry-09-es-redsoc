@@ -16,6 +16,9 @@ public class RDFReactorGeneratorTest {
 	
 	@Test
 	public void testGenerateClasses() throws Exception {
-		this.instance.generateClasses();
+		String rdfsFile = "D:\\ontologies\\qallme-tourism4.0.owl";
+		String outDir = "./src/main/java/";
+		String targetPackage = "com.andago.qallme.classes.gen";
+		this.instance.generateClasses(rdfsFile, outDir, targetPackage);
 	}
 }
