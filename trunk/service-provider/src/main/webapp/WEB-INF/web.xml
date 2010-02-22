@@ -5,14 +5,23 @@
 <web-app>
   
   	<display-name>Users preferences application</display-name>
-
+	
+	<context-param>  
+      <param-name>application.workfolder</param-name> 
+      <!--
+      <param-value>/home/preferences-service/userpreferences</param-value>
+      -->
+      <param-value>D:\app_data\userpreferences</param-value>
+      
+   </context-param>
+   
 	<context-param>  
       <param-name>contextConfigLocation</param-name>  
       <param-value>classpath:/applicationContext.xml</param-value>
    </context-param>
    
 	<listener>
-    	<listener-class>com.andago.webtvprovider.web.listener.AppInitializer</listener-class>
+    	<listener-class>com.andago.restlayer.listener.AppInitializer</listener-class>
   	</listener>
 	
  	<listener>  
@@ -25,7 +34,7 @@
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.andago.webtvprovider.web.service.rest</param-value>
+            <param-value>com.andago.restlayer.resources</param-value>
         </init-param>
 		<load-on-startup>1</load-on-startup>
     </servlet>

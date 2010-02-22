@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import org.jdom.output.XMLOutputter;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.andago.question.storage.ifc.IAnswerStore;
 import com.andago.question.exception.storage.StorageCreationException;
 import com.andago.question.exception.storage.StorageAccessException;
@@ -13,7 +16,7 @@ import com.andago.question.exception.storage.StorageAccessException;
  * @author eduardo.perrino
  *
  */
-public class FileSystemAnswerStore implements IAnswerStore {
+public class FileSystemAnswerStore implements IAnswerStore  {
 	
 	private final static String storageName = "answers";
 	private String storagePath = "";
@@ -116,5 +119,16 @@ public class FileSystemAnswerStore implements IAnswerStore {
 					"create store in " + store.getAbsolutePath());
 		}
 	}
+
+
+	@Override
+	public Map<String, String> getConfig() {
+		Map<String, String> configData = new HashMap<String,String>();
+		configData.put("Answer store type", this.getClass().toString());
+		configData.put("Answare store folder", this.storagePath);
+		return configData;
+	}
+	
+	
 	
 }

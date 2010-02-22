@@ -11,6 +11,7 @@ import java.util.HashMap;
 import org.apache.commons.beanutils.BasicDynaClass;
 import org.apache.commons.beanutils.DynaBean;
 
+@Ignore
 public class DynamicClassGeneratorTest {
 	
 	private static Logger log = Logger.getLogger(DynamicClassGeneratorTest.class);
