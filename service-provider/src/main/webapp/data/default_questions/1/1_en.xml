@@ -10,6 +10,7 @@
         <answer>
             <code>1</code>
             <text>yes</text>
+            <topic>http://copernico.topic.com#London</topic>
         </answer>
         <answer>
             <code>2</code>

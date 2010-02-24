@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import com.andago.question.core.QuestionManager;
 import org.springframework.stereotype.Component;
 import com.sun.jersey.spi.inject.Inject;
+import com.andago.restlayer.resources.BaseResource;
+import com.andago.semanthic.annotation.person.ifc.IPersonAnnotable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,9 @@ public class QuestionResource extends BaseResource {
 	
 	@Inject("questionManager")
     private QuestionManager questionManager;
-
+	
+	@Inject("personsAnnotator")
+    private IPersonAnnotable annotator;
 
 	@GET
     @Path("discover/{person_email}/{language}")
@@ -35,6 +39,8 @@ public class QuestionResource extends BaseResource {
 		try {
 			org.jdom.Document questionDoc = this.questionManager.
 				getQuestionXML(personEmail, language);
+			this.annotator.annotatePerson(personEmail, 
+					"testing-name", "testing-familyName");
 			response = this.buildOkResponse(questionDoc);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -60,14 +66,24 @@ public class QuestionResource extends BaseResource {
 		}
 		String response = "";
 		try {
+			/*TO-DO implementar transaccionalidad*/
 			this.questionManager.answerQuestion(personEmail, 
 					questionId, language, parsedAnswers, comment);
+			/*Recuperar los topic resultantes de contestar la pregunta*/
+			List<String> topics = this.questionManager.getQuestionTopics(questionId, 
+					language, parsedAnswers);
+			/*Anadir los topics al registro FOAF de la persona.*/
+			for(String topic : topics) {
+				this.annotator.addInterestTopicToPerson(personEmail, 
+						topic);
+			}
 			response = this.buildOkResponse("Question " + questionId + 
 					" have been answered succesfully for person " +
 					personEmail);
 		} catch(Exception e) {
+			e.printStackTrace();
 			log.error("Error answering: " + e.getMessage());
-			response = this.buildErrorResponse(e.getMessage());
+			response = this.buildErrorResponse(e.getMessage().toString());
 		}
 		return response;
 	}
@@ -88,14 +104,16 @@ public class QuestionResource extends BaseResource {
 		configHTML +="<body>";
 		configHTML +="<table>";
 		for(String field : this.questionManager.getConfig().keySet()) {
-			configHTML +="<tr>";
-			configHTML +="<td>" + field + "</td>";
-			configHTML +="<td>" + this.questionManager.getConfig().get(field) + "</td>";
-			configHTML +="</tr>";
+			configHTML += "<tr>";
+			configHTML += "<td>" + field + "</td>";
+			configHTML += "<td>" + 
+				this.questionManager.getConfig().get(field) + 
+				"</td>";
+			configHTML += "</tr>";
 		}
-		configHTML +="</table>";
-		configHTML +="</body>";
-		configHTML +="</html>";
+		configHTML += "</table>";
+		configHTML += "</body>";
+		configHTML += "</html>";
 		return configHTML;
 	}
 	

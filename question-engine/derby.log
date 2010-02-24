@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2010-01-12 16:20:09.708 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0126-2355-c86d-0000002ba120
-on database directory C:\Users\eduardo.perrino\AppData\Local\Temp\userpreferences\amadeusdb  
+2010-02-24 15:57:56.976 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0127-00b2-e44f-0000002d94f8
+on database directory D:\app_data\userpreferences\amadeusdb  
 
 Database Class Loader started - derby.database.classpath=''

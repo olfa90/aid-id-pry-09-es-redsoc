@@ -12,7 +12,7 @@ import com.sun.jersey.test.framework.util.ApplicationDescriptor;
 public class PersonResourceTest extends JerseyTest {
 	
 	/*The logger.*/
-	private static Logger log = Logger.getLogger(AgentResourceTest.class);
+	private static Logger log = Logger.getLogger(QuestionResourceTest.class);
 	
 	public PersonResourceTest() throws Exception {
 		super();

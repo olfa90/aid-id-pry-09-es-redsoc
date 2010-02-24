@@ -10,14 +10,17 @@
         <answer>
             <code>1</code>
             <text>London</text>
+            <topic>http://copernico.topic.com#London</topic>
         </answer>
         <answer>
             <code>2</code>
             <text>Miami</text>
+            <topic>http://copernico.topic.com#Miami</topic>
         </answer>
         <answer>
             <code>3</code>
             <text>Amsterdam</text>
+            <topic>http://copernico.topic.com#Amsterdam</topic>
         </answer>
     </proposal>
 </qdescriptor>

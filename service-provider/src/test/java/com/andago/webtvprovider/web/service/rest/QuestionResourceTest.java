@@ -18,12 +18,12 @@ import java.util.HashMap;
 import javax.ws.rs.core.MultivaluedMap;
 
 @Ignore
-public class AgentResourceTest extends JerseyTest {
+public class QuestionResourceTest extends JerseyTest {
 	
 	/*The logger.*/
-	private static Logger log = Logger.getLogger(AgentResourceTest.class);
+	private static Logger log = Logger.getLogger(QuestionResourceTest.class);
 	
-	public AgentResourceTest() throws Exception {
+	public QuestionResourceTest() throws Exception {
 		super();
 		ApplicationDescriptor appDescriptor = new ApplicationDescriptor();
 		appDescriptor.setContextPath("/userpreferences/services");
@@ -54,18 +54,18 @@ public class AgentResourceTest extends JerseyTest {
     	//formData.add("answers", answers);
     	formData.put("answers", answers);
     	formData.add("comment", "Comentario de prueba");
-    	ClientResponse response = webResource.path("agent/answer").
+    	ClientResponse response = webResource.path("question/answer").
     		type("application/x-www-form-urlencoded").post(ClientResponse.class, formData);
     	log.debug(response.getEntity(String.class));
     }
     
-    
+    @Test
 	public void testGetQuestion() throws Exception {
-		String responseMsg = webResource.path("agent/question/leo@gmail.com/eu").get(String.class);
+		String responseMsg = webResource.path("question/discover/leo@gmail.com/eu").get(String.class);
 		log.debug(responseMsg);
 	}
     
-	@Test
+	
     public void testApplicationWadl() {
         String serviceWadl = webResource.path("application.wadl").
                 accept(MediaTypes.WADL).get(String.class);
