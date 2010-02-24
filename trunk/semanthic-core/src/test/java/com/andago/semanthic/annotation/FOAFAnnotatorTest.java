@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-@Ignore
+
 public class FOAFAnnotatorTest {
 	
 	private static Logger log = Logger.getLogger(FOAFAnnotatorTest.class);
 	private FOAFAnnotator foafAnnotator; 
 	private final static String dbURL = 
-		"jdbc:derby:D:\\workspace\\semanthic-app\\data_store\\semanthicdb;create=true";
+		"jdbc:derby:D:\\app_data\\userpreferences\\semanthicdb;create=true";
 	private final static String dbUser = "root";
 	private final static String dbPw = "demonio";
 	private final static String dbType = "Derby";
@@ -30,34 +30,26 @@ public class FOAFAnnotatorTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		//ApplicationContext context = new 
-	 	//	ClassPathXmlApplicationContext("/application_Context.xml");
-		//this.foafAnnotator = (FOAFAnnotator)context.getBean("personsAnnotator");
-		//this.foafAnnotator = new FOAFAnnotator("D:\\ontologies\\questions_users.owl");
-		String inputFilename = "D:\\ontologies\\questions_users.owl";
-		this.foafAnnotator = new FOAFAnnotator(dbURL, dbUser, dbPw, dbType, 
-				dbClean,inputFilename);
+		this.foafAnnotator = new FOAFAnnotator(dbURL, 
+				dbUser, dbPw, dbType, dbClean,
+				"http://copernico.com");
 	}
 	
 	
 	
 	public void testAddPerson() throws Exception {
-		String email = "alfonso.perez@gmail.com";
-		String name = "Alfonso";
+		String email = "jartyuhuu.perez@gmail.com";
+		String name = "Yuhuu";
 		String surname = "Perrino";
-		this.foafAnnotator.addPerson(email, name, surname);
-		email = "alonso@hotmail.com";
-		name = "Alberto";
-		surname = "Perez";
-		this.foafAnnotator.addPerson(email, name, surname);
-		FileOutputStream fos = new FileOutputStream("D:\\ontologies\\questions_users.owl");
+		this.foafAnnotator.annotatePerson(email, name, surname);
+		
 	}
 	
 	
-	@Test
+	
 	public void testGetPerson() throws Exception {
 		DynaBean bean = this.foafAnnotator.
-			getPerson("alonso@hotmail.com");
+			getPerson("pp@gmail.com");
 		if(bean==null) {
 			return;
 		}
@@ -68,16 +60,19 @@ public class FOAFAnnotatorTest {
 	}
 	
 	
-	public void testAddTopicsToPerson() throws Exception {
-		List<String> topics = new ArrayList<String>();
-		topics.add("London");
-		topics.add("Miami");
-		this.foafAnnotator.addTopicsToPerson("eduardo.perrino@gmail.com", topics);
+	
+	public void testAddTopicToPerson() throws Exception {
+		String topic = "http://copernico.topics.com#london";
+		this.foafAnnotator.addInterestTopicToPerson("jartyuhuu.perez@gmail.com", 
+				topic);
 	}
 	
 	
-	public void testAddTopic() {
-		this.foafAnnotator.addTopic("london", "London");
+	@Test
+	public void testShowModel() {
+		PrintWriter writer = new PrintWriter(System.out);
+		this.foafAnnotator.showModel(writer);
 	}
+	
 	
 }

@@ -3,7 +3,7 @@
     <xs:complexType name="question">
         <xs:all>
             <xs:element name="identifier" type="xs:positiveInteger"/>
-            <xs:element name="topic" type="xs:string"/>
+            <xs:element name="topic" type="xs:anyURI"/>
             <xs:element name="text" type="xs:string"/>
             <xs:element name="type" type="listaTipos"/>
         </xs:all>
@@ -12,6 +12,7 @@
         <xs:all>
             <xs:element name="code" type="xs:positiveInteger"/>
             <xs:element name="text" type="xs:string"/>
+            <xs:element name="topic" type="xs:anyURI" minOccurs="0"/>
         </xs:all>
     </xs:complexType>
     <xs:simpleType name="listaTipos">

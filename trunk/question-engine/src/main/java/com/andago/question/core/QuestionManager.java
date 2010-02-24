@@ -9,6 +9,7 @@ import org.jdom.output.XMLOutputter;
 import java.util.Date;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.HashMap;
@@ -25,6 +26,9 @@ import com.andago.question.exception.core.QuestionNotAvailableException;
 import java.util.List;
 import com.andago.question.exception.core.BadAnswerException;
 import com.andago.question.config.IConfigable;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 /**
  * 
  * This class give the  methods to manage person's preferences questions 
@@ -51,6 +55,9 @@ public class QuestionManager implements IConfigable {
 	private QuestionDAO questionDAO;
 	/*Answer store object.*/
 	private IAnswerStore answerStore;
+	
+	private static String SINGLE_TYPE = "single";
+	private static String MULTIPLE_TYPE = "multiple";
 	
 	/**
 	 * Constructor of the class.
@@ -180,6 +187,42 @@ public class QuestionManager implements IConfigable {
 				break;
 			}
 		}
+	}
+	
+	public List<String> getQuestionTopics(Integer questionId, 
+			String language, List<String> answers) 
+			throws Exception {
+		List<String> topics = new ArrayList<String>();
+		String questionFileName = questionId 
+			+ "_" + language + ".xml";
+		String questionPath =  this.question_storage.getAbsolutePath() + 
+			File.separator + questionId + 
+			File.separator + questionFileName;
+		Document questionDocument = null;
+		SAXBuilder sb = new SAXBuilder();
+		questionDocument = sb.build(new File(questionPath));
+		topics.addAll(this.extractTopicsFromQuestion(
+				questionDocument, answers));
+		return topics;
+	}
+	
+	private List<String> extractTopicsFromQuestion(
+			Document questionDocument, List<String> answers) 
+			throws URISyntaxException {
+		List<String> topics = new ArrayList<String>();
+		List<Element> answersEls = questionDocument.getRootElement().
+			getChild("proposal").getChildren("answer");
+		String topic = "", code = "";
+		for(Element answer : answersEls) {
+			topic = answer.getChild("topic")!=null?
+					answer.getChild("topic").getText():"";
+			code = answer.getChild("code")!=null?
+					answer.getChild("code").getText():"";
+			if(!"".equals(topic) && answers.contains(code)) {
+				topics.add(topic);
+			}
+		}
+		return topics;
 	}
 	
 	

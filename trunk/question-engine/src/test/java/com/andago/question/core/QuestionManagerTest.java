@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.andago.question.dao.QuestionDAO;
 import com.andago.question.storage.impl.FileSystemAnswerStore;
+
+import java.net.URI;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,8 +23,10 @@ public class QuestionManagerTest {
 	@Before
 	public void setUp() {
 		log.debug("Configuring Question-Dispatcher..");
+		System.setProperty("application.workfolder", 
+				"D:\\app_data\\userpreferences");
 		ApplicationContext context = new 
-	 	ClassPathXmlApplicationContext("/application_Context.xml");
+	 	ClassPathXmlApplicationContext("/applicationContext.xml");
 		questionManager = (QuestionManager)context.getBean("questionManager");
 	}
 	
@@ -35,7 +39,7 @@ public class QuestionManagerTest {
 		log.debug("Question-Content: " + question_content);
 	}
 	
-	@Test
+	
 	public void answerQuestion() throws Exception {
 		String personEmail = "eduardo.perrino@gmail.com";
 		Integer questionId = 1;
@@ -46,5 +50,20 @@ public class QuestionManagerTest {
 		answers.add("4");
 		this.questionManager.answerQuestion(personEmail, questionId, 
 				language, answers, comment);
+	}
+	
+	@Test
+	public void testExtractTopicsFromQuestion() 
+		throws Exception {
+		Integer questionId = 2;
+		String language = "es";
+		List<String> answers = new ArrayList<String>();
+		answers.add("1");
+		List<String> topics = this.questionManager.getQuestionTopics(questionId, 
+				language, answers);
+		log.debug("Extracted topics...........");
+		for(String topic : topics) {
+			log.debug("Topic: " + topic.toString());
+		}
 	}
 }

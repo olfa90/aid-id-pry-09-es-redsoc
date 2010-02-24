@@ -17,7 +17,7 @@
         <!--Derby database -->
         <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
         <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop>
-        <prop key="hibernate.connection.url">jdbc:derby:${java.io.tmpdir}userpreferences${file.separator}amadeusdb;create=true</prop>
+        <prop key="hibernate.connection.url">jdbc:derby:${application.workfolder}${file.separator}amadeusdb;create=true</prop>
         <prop key="hibernate.connection.username">amadeus</prop>
         <prop key="hibernate.connection.password">demonio</prop>
         
@@ -65,17 +65,15 @@
   </bean>
   
   <bean id="answerStore" class="com.andago.question.storage.impl.FileSystemAnswerStore">
-    	<constructor-arg index="0" value="${java.io.tmpdir}userpreferences"/>
+    	<constructor-arg index="0" value="${application.workfolder}"/>
   </bean>
   
   
   <bean id="questionManager" class="com.andago.question.core.QuestionManager">
-  	 	<!-- constructor injection using the neater 'ref' attribute 
-  		<constructor-arg index="0" value="D:\\workspace\\semanthic-app\\data_store"/>
-  		-->
-  		<constructor-arg index="0" value="${java.io.tmpdir}userpreferences"/>
+  		<constructor-arg index="0" value="${application.workfolder}"/>
   		<constructor-arg index="1" ref="questionDAO"/>
   		<constructor-arg index="2" ref="answerStore"/>
   </bean>
+  
 
 </beans>

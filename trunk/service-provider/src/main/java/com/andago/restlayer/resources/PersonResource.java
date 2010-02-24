@@ -1,5 +1,6 @@
 package com.andago.restlayer.resources;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.GET;
@@ -12,11 +13,11 @@ import com.sun.jersey.spi.inject.Inject;
 import javax.ws.rs.FormParam;
 import org.apache.commons.beanutils.DynaBean;
 import net.sf.json.JSONObject;
-
+import com.andago.restlayer.resources.BaseResource;
 
 @Path("/person")
 @Component
-public class PersonResource {
+public class PersonResource extends BaseResource {
 	
 	private static Logger log = Logger.getLogger(PersonResource.class);
 	
@@ -24,9 +25,20 @@ public class PersonResource {
     private IPersonAnnotable annotator;
 	
 	@PUT
-	public void addPerson(@FormParam("email") String email,
-			@FormParam("name") String name) {
-		
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces({"application/xml"})
+	public String annotatePerson(@FormParam("email") String email,
+			@FormParam("name") String name, 
+			@FormParam("familyname") String familyName) {
+		String response = "";
+		try {
+			this.annotator.annotatePerson(email, name, familyName);
+			response = this.buildOkResponse("Person " + email + 
+					" have been annotated succesfully.");
+		} catch(Exception e) {
+			
+		}
+		return response;
 	}
 	
 	
