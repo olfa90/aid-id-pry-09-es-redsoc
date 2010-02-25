@@ -36,20 +36,20 @@ public class FOAFAnnotatorTest {
 	}
 	
 	
-	
+	@Test
 	public void testAddPerson() throws Exception {
 		String email = "jartyuhuu.perez@gmail.com";
-		String name = "Yuhuu";
-		String surname = "Perrino";
+		String name = "Yuhuuxxx";
+		String surname = "";
 		this.foafAnnotator.annotatePerson(email, name, surname);
 		
 	}
 	
 	
-	
+	@Test
 	public void testGetPerson() throws Exception {
 		DynaBean bean = this.foafAnnotator.
-			getPerson("pp@gmail.com");
+			getPerson("jartyuhuu.perez@gmail.com");
 		if(bean==null) {
 			return;
 		}
@@ -68,7 +68,7 @@ public class FOAFAnnotatorTest {
 	}
 	
 	
-	@Test
+	
 	public void testShowModel() {
 		PrintWriter writer = new PrintWriter(System.out);
 		this.foafAnnotator.showModel(writer);
