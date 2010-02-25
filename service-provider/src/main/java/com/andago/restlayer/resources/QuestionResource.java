@@ -77,7 +77,6 @@ public class QuestionResource extends BaseResource {
 					" have been answered succesfully for person " +
 					personEmail);
 		} catch(Exception e) {
-			e.printStackTrace();
 			log.error("Error answering: " + e.getMessage());
 			response = this.buildErrorResponse(e.getMessage().toString());
 		}
