@@ -1,37 +1,38 @@
 package com.andago.restlayer.resources;
 
-import java.util.HashMap;
-import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.Ignore;
-import com.sun.jersey.test.framework.JerseyTest;
-import com.sun.jersey.test.framework.util.ApplicationDescriptor;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.representation.Form;
 
 @Ignore
-public class PersonResourceTest extends JerseyTest {
+public class PersonResourceTest extends BaseResourceTest {
 	
 	/*The logger.*/
-	private static Logger log = Logger.getLogger(QuestionResourceTest.class);
+	private static Logger log = Logger.getLogger(PersonResourceTest.class);
 	
 	public PersonResourceTest() throws Exception {
-		super();
-		ApplicationDescriptor appDescriptor = new ApplicationDescriptor();
-		appDescriptor.setContextPath("/userpreferences/services");
-        appDescriptor.setRootResourcePackageName("com.andago.webtvprovider.web.service.rest");
-        appDescriptor.setContextListenerClassName("com.andago.webtvprovider.web.listener.AppInitializer");
-        appDescriptor.setContextListenerClassName("org.springframework.web.context.ContextLoaderListener");
-        Map<String, String> contextParams = new HashMap<String, String>();
-		contextParams.put("contextConfigLocation", "classpath:applicationContext.xml");
-        appDescriptor.setContextParams(contextParams);
-        appDescriptor.setServletClass(com.sun.jersey.spi.spring.container.servlet.SpringServlet.class);
-        super.setupTestEnvironment(appDescriptor);
+	}
+	
+	
+	
+	@Test
+	public void testAnnotatePerson() {
+		Form formData = new Form();
+    	formData.add("email", "julandres@gmail.com");
+    	formData.add("name", "jepos");
+    	formData.add("familyname", "tostoxxxx");
+    	ClientResponse response = webResource.path("person").
+			type("application/x-www-form-urlencoded").put(ClientResponse.class, 
+			formData);
 	}
 	
 	@Test
 	public void testGetPerson() {
 		String responseMsg = webResource.
-			path("person/eduardo.perrino@gmail.com").get(String.class);
+			path("person/julandres@gmail.com").get(String.class);
 		log.debug("Response: " + responseMsg);
 	}
 }

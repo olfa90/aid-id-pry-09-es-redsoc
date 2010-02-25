@@ -15,23 +15,13 @@ import java.util.HashMap;
 
 
 @Ignore
-public class QuestionResourceTest extends JerseyTest {
+public class QuestionResourceTest extends BaseResourceTest {
 	
 	/*The logger.*/
 	private static Logger log = Logger.getLogger(QuestionResourceTest.class);
 	
 	public QuestionResourceTest() throws Exception {
 		super();
-		ApplicationDescriptor appDescriptor = new ApplicationDescriptor();
-		appDescriptor.setContextPath("/userpreferences/services");
-		Map<String, String> contextParams = new HashMap<String, String>();
-		contextParams.put("contextConfigLocation", "classpath:applicationContext.xml");
-		System.setProperty("application.workfolder", "D:\\app_data\\userpreferences");
-        appDescriptor.setContextParams(contextParams);
-        appDescriptor.setRootResourcePackageName("com.andago.restlayer.resources");
-        appDescriptor.setContextListenerClassName("org.springframework.web.context.ContextLoaderListener");
-        appDescriptor.setServletClass(com.sun.jersey.spi.spring.container.servlet.SpringServlet.class);
-        super.setupTestEnvironment(appDescriptor);
 	}
 	
 	/**
@@ -55,14 +45,12 @@ public class QuestionResourceTest extends JerseyTest {
     
     @Test
 	public void testGetQuestion() throws Exception {
-		String responseMsg = webResource.path("question/discover/leo@gmail.com/eu").get(String.class);
+		String responseMsg = webResource.path("question/discover/leox@gmail.com/eu").get(String.class);
 		log.debug(responseMsg);
 	}
     
 	
     public void testApplicationWadl() throws MalformedURLException {
-		System.out.println("WebResource-Path: " + 
-				webResource.path("application.wadl").getURI().toURL().toString());
 		String serviceWadl = webResource.path("application.wadl").
                 accept(MediaTypes.WADL).get(String.class);
         System.out.println("Wadl: " + serviceWadl);

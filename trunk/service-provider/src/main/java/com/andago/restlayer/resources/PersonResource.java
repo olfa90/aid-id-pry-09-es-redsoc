@@ -43,9 +43,9 @@ public class PersonResource extends BaseResource {
 	
 	
 	@GET
-	@Path("{person_email}")
+	@Path("{email}")
 	@Produces("application/json")
-	public String getPerson(@PathParam("person_email")
+	public String getPerson(@PathParam("email")
 			String personEmail) throws Exception {
 		DynaBean person = this.annotator.getPerson(personEmail);
 		JSONObject jsonObject = JSONObject.fromObject( person );
