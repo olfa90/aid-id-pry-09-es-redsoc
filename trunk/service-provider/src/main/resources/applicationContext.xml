@@ -17,7 +17,7 @@
         <!--Derby database -->
         <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
         <prop key="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</prop>
-        <prop key="hibernate.connection.url">jdbc:derby:${application.workfolder}${file.separator}amadeusdb;create=true</prop>
+        <prop key="hibernate.connection.url">jdbc:derby:${application.workfolder}${file.separator}questiondb;create=true</prop>
         <prop key="hibernate.connection.username">amadeus</prop>
         <prop key="hibernate.connection.password">demonio</prop>
         
@@ -77,7 +77,7 @@
   
   
 	<bean id="personsAnnotator" class="com.andago.semanthic.annotation.person.impl.FOAFAnnotator">
-  		<constructor-arg index="0" value="jdbc:derby:${application.workfolder}${file.separator}semanthicdb;create=true"/>
+  		<constructor-arg index="0" value="jdbc:derby:${application.workfolder}${file.separator}datacorpusdb;create=true"/>
     	<constructor-arg index="1" value="root"/>
     	<constructor-arg index="2" value="demonio"/>
     	<constructor-arg index="3" value="Derby"/>

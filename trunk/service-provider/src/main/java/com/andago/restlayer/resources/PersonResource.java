@@ -36,7 +36,9 @@ public class PersonResource extends BaseResource {
 			response = this.buildOkResponse("Person " + email + 
 					" have been annotated succesfully.");
 		} catch(Exception e) {
-			
+			log.error("Error in annotation process: " + 
+					e.getMessage());
+			response = this.buildErrorResponse(e.getMessage().toString());
 		}
 		return response;
 	}
@@ -46,12 +48,21 @@ public class PersonResource extends BaseResource {
 	@Path("{email}")
 	@Produces("application/json")
 	public String getPerson(@PathParam("email")
-			String personEmail) throws Exception {
-		DynaBean person = this.annotator.getPerson(personEmail);
-		JSONObject jsonObject = JSONObject.fromObject( person );
-		log.debug("Email to find: " + personEmail);
-		log.debug("++++Annotator: " + this.annotator);
-		return jsonObject.toString();
+			String personEmail) {
+		try {
+			DynaBean person = this.annotator.getPerson(personEmail);
+			JSONObject jsonObject = JSONObject.fromObject( person );
+			log.debug("Email to find: " + personEmail);
+			log.debug("++++Annotator: " + this.annotator);
+			return jsonObject.toString();
+		} catch(Exception e) {
+			log.error("Error getting person FOAF info: " + 
+					e.getMessage());
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("error", e.getLocalizedMessage());
+			return jsonObject.toString();
+		}
 	}
+	
 	
 }
