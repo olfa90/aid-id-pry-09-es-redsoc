@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-2010-01-18 12:09:15.747 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0126-4156-3bcb-0000002d8fb0
-on database directory C:\Users\eduardo.perrino\AppData\Local\Temp\userpreferences\amadeusdb  
+2010-02-25 09:32:37.654 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0127-0478-7bdc-0000002b26e0
+on database directory D:\app_data\userpreferences\amadeusdb  
 
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-2010-01-18 12:09:18.412 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance b8450018-0126-4156-3bcb-0000002d8fb0
-on database directory D:\workspace\semanthic-app\data_store\semanthicdb  
+2010-02-25 09:32:40.546 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance b8450018-0127-0478-7bdc-0000002b26e0
+on database directory D:\app_data\userpreferences\semanthicdb  
 
 Database Class Loader started - derby.database.classpath=''
