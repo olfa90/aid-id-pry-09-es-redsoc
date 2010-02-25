@@ -8,12 +8,17 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import org.apache.log4j.Logger;
+import org.jdom.JDOMException;
 import com.andago.question.core.QuestionManager;
+import com.andago.question.exception.core.BadAnswerException;
+import com.andago.question.exception.dao.PersonNotExistException;
+import com.andago.question.exception.storage.StorageAccessException;
+import com.andago.question.exception.storage.StorageCreationException;
 import org.springframework.stereotype.Component;
 import com.sun.jersey.spi.inject.Inject;
 import com.andago.restlayer.resources.BaseResource;
 import com.andago.semanthic.annotation.person.ifc.IPersonAnnotable;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,17 +71,8 @@ public class QuestionResource extends BaseResource {
 		}
 		String response = "";
 		try {
-			/*TO-DO implementar transaccionalidad*/
-			this.questionManager.answerQuestion(personEmail, 
-					questionId, language, parsedAnswers, comment);
-			/*Recuperar los topic resultantes de contestar la pregunta*/
-			List<String> topics = this.questionManager.getQuestionTopics(questionId, 
-					language, parsedAnswers);
-			/*Anadir los topics al registro FOAF de la persona.*/
-			for(String topic : topics) {
-				this.annotator.addInterestTopicToPerson(personEmail, 
-						topic);
-			}
+			this.doAnswerAction(questionId, personEmail, 
+					language, parsedAnswers, comment);
 			response = this.buildOkResponse("Question " + questionId + 
 					" have been answered succesfully for person " +
 					personEmail);
@@ -98,6 +94,29 @@ public class QuestionResource extends BaseResource {
         return this.constructConfigInfo();
     }
 	
+	
+	
+	private void doAnswerAction(Integer questionId, 
+			String personEmail, String language,
+			List<String> answers, String comment) 
+			throws StorageCreationException, 
+				StorageAccessException, IOException, 
+				JDOMException, PersonNotExistException, 
+				BadAnswerException, Exception {
+		/**TO-DO En este apartado se deberia implementar 
+		 * transaccionalidad, de tal forma que si cualquier
+		 * operacion fallara, se deberia hacer un rollback.*/
+		this.questionManager.answerQuestion(personEmail, 
+				questionId, language, answers, comment);
+		/*Recuperar los topic resultantes de contestar la pregunta*/
+		List<String> topics = this.questionManager.getQuestionTopics(questionId, 
+				language, answers);
+		/*Anadir los topics al registro FOAF de la persona.*/
+		for(String topic : topics) {
+			this.annotator.addInterestTopicToPerson(personEmail, 
+					topic);
+		}
+	}
 	
 	private String constructConfigInfo() {
 		String configHTML = "<html><head></head>";

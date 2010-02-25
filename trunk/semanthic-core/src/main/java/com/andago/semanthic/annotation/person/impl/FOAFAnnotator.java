@@ -77,24 +77,14 @@ public class FOAFAnnotator implements IPersonAnnotable {
 	@Override
 	public void annotatePerson(String email, String name, 
 			String familyName) throws Exception {
-		if(this.existsPerson(email)) {
+		Resource person = this.findPerson(email);
+		if(person!=null) {
+			this.modifyPerson(person, name, familyName);
 			return;
+		} else {
+			this.insertPerson(email, name, familyName);
 		}
-		this.model.begin();
-		String shaSum = HashGenerator.getSuminHex(email, 
-				"SHA");
-		String resourceURI = APP_NS + "#" + shaSum;
-		Resource me = 
-			this.model.createResource(resourceURI);
-		me.addProperty(RDF.type, FOAF.Person);
-		me.addProperty(FOAF.name, name + " " + familyName);
-		me.addProperty(FOAF.givenname, name);
-		me.addProperty(FOAF.family_name, familyName);
-		me.addProperty(FOAF.mbox_sha1sum, shaSum);
-		Resource mail = this.model.createResource
-			("mailto:" + email);
-		me.addProperty(FOAF.mbox, mail);
-		this.model.commit();
+		
 	}
 	
 	
@@ -136,6 +126,39 @@ public class FOAFAnnotator implements IPersonAnnotable {
 		this.model.write(writer);
 	}
 	
+	
+	private void insertPerson(String email, String name, 
+			String familyName) throws NoSuchAlgorithmException {
+		this.model.begin();
+		String shaSum = HashGenerator.getSuminHex(email, 
+				"SHA");
+		String resourceURI = APP_NS + "#" + shaSum;
+		Resource person = 
+			this.model.createResource(resourceURI);
+		person.addProperty(RDF.type, FOAF.Person);
+		person.addProperty(FOAF.name, name + " " + familyName);
+		person.addProperty(FOAF.givenname, name);
+		person.addProperty(FOAF.family_name, familyName);
+		person.addProperty(FOAF.mbox_sha1sum, shaSum);
+		Resource mail = this.model.createResource
+			("mailto:" + email);
+		person.addProperty(FOAF.mbox, mail);
+		this.model.commit();
+	}
+	
+	private void modifyPerson(Resource person, 
+			String name, String familyName) {
+		this.model.begin();
+		if(!"".equals(name) && !"".equals(familyName)) {
+			person.removeAll(FOAF.name);
+			person.addProperty(FOAF.name, name + " " + familyName);
+			person.removeAll(FOAF.givenname);
+			person.addProperty(FOAF.givenname, name);
+			person.removeAll(FOAF.family_name);
+			person.addProperty(FOAF.family_name, familyName);
+		}
+		this.model.commit();
+	}
 	
 	/**
 	 * Method to create the KB model into a database.
